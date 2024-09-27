@@ -40,21 +40,27 @@ struct Person {
 class PersonReg {
 private:
 
-	std::vector<Person*> personer;
+	Person* personer;
 	int maxStorlek;
+	int currentSize;
 public:
-	PersonReg(int maxStorlek) : maxStorlek(maxStorlek) {}
-	~PersonReg() 
+	PersonReg(int maxStorlek) : maxStorlek(maxStorlek), currentSize(0)
+	{
+		personer = new Person[maxStorlek];
+	}
+	~PersonReg()
 	{
 		Töm();
 	}
+
+	
 	
 	bool LäggTill(const Person* const person) {
 
-		if(personer.size()<maxStorlek)
+		if(currentSize<maxStorlek)
 		{
-			personer.push_back(new Person(*person));
-			return true;
+			personer[currentSize++] = person;
+			return true; 
 		}
 		return false;
 
@@ -65,36 +71,34 @@ public:
 	}
 	void TaBortEntry(Person* ptr)
 	{
-		//auto är som var?
-		auto it = std::find(personer.begin(), personer.end(), ptr);
-		if(it!= personer.end())
+		if(ptr>= personer && ptr<personer + currentSize)
 		{
-			delete* it;
-			personer.erase(it);
+			int index = ptr - personer;
+			for(Person* it =personer +index; it!= personer + currentSize-1; it++)
+			{
+				*it = *it(it + 1);
+			}
+			currentSize--;
 		}
 	}
 	void Töm() {
-		for (auto& person : personer) {
-			delete person;
-
-		}
-		personer.clear();
+		currentSize = 0;
 	}
 	Person* SökNamn(const std::string& namn)
 	{
-		for(auto& person: personer)
+		for(Person* ptr = personer;ptr!= personer + currentSize;++ptr )
 		{
-			if (person->name==namn)
+			if (ptr->name==namn)
 			{
-				return person;
+				return ptr;
 			}
 		}
 		return nullptr;
 	}
 
-	void Print() 
+	void Print() const
 	{
-		for(const auto& person:personer )
+		for(Person*ptr = personer; ptr!=personer + currentSize;ptr++ )
 		{
 			person->Print();
 		}
