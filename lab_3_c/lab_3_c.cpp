@@ -31,6 +31,10 @@ struct Person {
 	std::string adress;
 
 	Person(std::string name, std::string adress) : name(name), adress(adress) {}
+	void Print() const 
+	{
+		std::cout << "Namn: " << name << "Address: " << adress << std::endl;
+	}
 };
 
 class PersonReg {
@@ -45,27 +49,56 @@ public:
 		Töm();
 	}
 	
-	bool LäggTill(const Person* const) {
+	bool LäggTill(const Person* const person) {
 
+		if(personer.size()<maxStorlek)
+		{
+			personer.push_back(new Person(*person));
+			return true;
+		}
+		return false;
 
 	}
 	bool LäggTillTest(const std::string& namn, const std::string& adress) {
 
-		
+		return LäggTill(new Person(namn, adress));
 	}
 	void TaBortEntry(Person* ptr)
 	{
-
+		//auto är som var?
+		auto it = std::find(personer.begin(), personer.end(), ptr);
+		if(it!= personer.end())
+		{
+			delete* it;
+			personer.erase(it);
+		}
 	}
 	void Töm() {
+		for (auto& person : personer) {
+			delete person;
 
+		}
+		personer.clear();
 	}
 	Person* SökNamn(const std::string& namn)
 	{
-		
+		for(auto& person: personer)
+		{
+			if (person->name==namn)
+			{
+				return person;
+			}
+		}
+		return nullptr;
 	}
 
-	void Print() {}
+	void Print() 
+	{
+		for(const auto& person:personer )
+		{
+			person->Print();
+		}
+	}
 };
 
 void Init(PersonReg& tr) {
