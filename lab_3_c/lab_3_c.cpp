@@ -29,7 +29,7 @@
 struct Person {
 	std::string name;
 	std::string adress;
-
+	Person():name(""),adress(""){}
 	Person(std::string name, std::string adress) : name(name), adress(adress) {}
 	void Print() const 
 	{
@@ -51,11 +51,12 @@ public:
 	~PersonReg()
 	{
 		Töm();
+		delete[] personer;
 	}
 
 	
 	
-	bool LäggTill(const Person* const person) {
+	bool LäggTill(const Person& person) {
 
 		if(currentSize<maxStorlek)
 		{
@@ -67,16 +68,16 @@ public:
 	}
 	bool LäggTillTest(const std::string& namn, const std::string& adress) {
 
-		return LäggTill(new Person(namn, adress));
+		return LäggTill(Person(namn, adress));
 	}
 	void TaBortEntry(Person* ptr)
 	{
 		if(ptr>= personer && ptr<personer + currentSize)
 		{
 			int index = ptr - personer;
-			for(Person* it =personer +index; it!= personer + currentSize-1; it++)
+			for(Person* it = personer +index; it< personer + currentSize-1; it++)
 			{
-				*it = *it(it + 1);
+				*it = *(it + 1);
 			}
 			currentSize--;
 		}
@@ -100,7 +101,7 @@ public:
 	{
 		for(Person*ptr = personer; ptr!=personer + currentSize;ptr++ )
 		{
-			person->Print();
+			ptr->Print();
 		}
 	}
 };
@@ -120,7 +121,7 @@ void Init(PersonReg& tr) {
 }
 
 #include <fstream>
-bool ReadReg(PersonReg& reg, std::string fileName) {
+bool ReadReg(PersonReg& reg, const std::string& fileName) {
 	std::string line;
 	std::ifstream myfile("PersonExempel.txt");
 
@@ -128,18 +129,18 @@ bool ReadReg(PersonReg& reg, std::string fileName) {
 	{
 		while (getline(myfile, line))
 		{
-			while (line.length() == 0 && getline(myfile, line))
-				;
+			while (line.length() == 0 && getline(myfile, line));
 			std::string name(line);
 			std::string adress;
 			getline(myfile, adress);
 			Person p(name, adress);
-			reg.LäggTill(&p);
+			reg.LäggTill(p);
 		}
 		myfile.close();
 		return true;
 	}
-	else {
+	else
+	{
 		std::cout << "Unable to open file";
 		return false;
 	}
@@ -158,7 +159,7 @@ void Test2() {
 	PersonReg reg(10);
 	Init(reg);
 	std::string namn, adress;
-	Person* tep;
+	Person  *tep; //te, *tep;
 
 	tep = reg.SökNamn("olle");
 	if (tep) {
@@ -192,13 +193,7 @@ void Test2() {
 	else
 		std::cout << "not found \n";
 
-	tep = reg.SökNamn("olle");
-	if (tep) {
-		std::cout << tep->adress << std::endl;
-		reg.TaBortEntry(tep);
-	}
-	else
-		std::cout << "not found \n";
+	
 
 	reg.Print();
 
@@ -245,7 +240,7 @@ int main() {
 	PersonReg pr(5);
 	Init(pr);
 	Test1();
-	Test2();
+	//Test2();
 	//Test3();
 	std::cin.get();
 }
