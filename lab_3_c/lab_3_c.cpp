@@ -29,9 +29,9 @@
 struct Person {
 	std::string name;
 	std::string adress;
-	Person():name(""),adress(""){}
+	Person() :name(""), adress("") {}
 	Person(std::string name, std::string adress) : name(name), adress(adress) {}
-	void Print() const 
+	void Print() const
 	{
 		std::cout << "Namn: " << name << "Address: " << adress << std::endl;
 	}
@@ -54,14 +54,14 @@ public:
 		delete[] personer;
 	}
 
-	
-	
+
+
 	bool LäggTill(const Person& person) {
 
-		if(currentSize<maxStorlek)
+		if (currentSize < maxStorlek)
 		{
 			personer[currentSize++] = person;
-			return true; 
+			return true;
 		}
 		return false;
 
@@ -72,10 +72,10 @@ public:
 	}
 	void TaBortEntry(Person* ptr)
 	{
-		if(ptr>= personer && ptr<personer + currentSize)
+		if (ptr >= personer && ptr < personer + currentSize)
 		{
 			int index = ptr - personer;
-			for(Person* it = personer +index; it< personer + currentSize-1; it++)
+			for (Person* it = personer + index; it < personer + currentSize - 1; it++)
 			{
 				*it = *(it + 1);
 			}
@@ -87,9 +87,9 @@ public:
 	}
 	Person* SökNamn(const std::string& namn)
 	{
-		for(Person* ptr = personer;ptr!= personer + currentSize;++ptr )
+		for (Person* ptr = personer; ptr != personer + currentSize; ++ptr)
 		{
-			if (ptr->name==namn)
+			if (ptr->name == namn)
 			{
 				return ptr;
 			}
@@ -99,7 +99,7 @@ public:
 
 	void Print() const
 	{
-		for(Person*ptr = personer; ptr!=personer + currentSize;ptr++ )
+		for (Person* ptr = personer; ptr != personer + currentSize; ptr++)
 		{
 			ptr->Print();
 		}
@@ -108,12 +108,12 @@ public:
 
 void Init(PersonReg& tr) {
 	tr.Töm();
-	PD(tr.LäggTillTest("olle", "0703955123"));
-	PD(tr.LäggTillTest("olle", "123"));
-	PD(tr.LäggTillTest("kurtåke", "12345"));
-	PD(tr.LäggTillTest("olle", "456"));
-	PD(tr.LäggTillTest("sven", "456"));
-	PD(tr.LäggTillTest("kurt", "95815"));
+	PD(tr.LäggTillTest("Olle", "0703955123"));
+	PD(tr.LäggTillTest("Olle", "123"));
+	PD(tr.LäggTillTest("Kurtåke","12345"));
+	PD(tr.LäggTillTest("Olle", "456"));
+	PD(tr.LäggTillTest("Sven", "456"));
+	PD(tr.LäggTillTest("Kurt", "95815"));
 	PN(std::endl);
 	PN(("fullt reg "));
 	PN((std::endl));
@@ -157,47 +157,61 @@ void Test1() {
 
 void Test2() {
 	PersonReg reg(10);
-	Init(reg);
+	ReadReg(reg, "PersonExempel.txt");
+	reg.Print(); std::cout << "\n\n";
+	//Init(reg);
 	std::string namn, adress;
-	Person  *tep; //te, *tep;
 
-	tep = reg.SökNamn("olle");
+	std::cout << "vilket namn vill du ta bort? \n";
+	std::getline(std::cin, namn);
+
+	Person* tep = reg.SökNamn(namn);
+
 	if (tep) {
-		std::cout << tep->adress << std::endl;
+		std::cout << "Adress för " << namn << ": " << tep->adress << std::endl;
+
 		reg.TaBortEntry(tep);
+		std::cout << "Har tagits bort från registret. \n";
 	}
-	else
+	else {
 		std::cout << "not found \n";
-
-	tep = reg.SökNamn("olle");
-	if (tep) {
-		std::cout << tep->adress << std::endl;
-		reg.TaBortEntry(tep);
 	}
-	else
-		std::cout << "not found \n";
 
-	tep = reg.SökNamn("olle");
-	if (tep) {
-		std::cout << tep->adress << std::endl;
-		reg.TaBortEntry(tep);
-	}
-	else
-		std::cout << "not found \n";
-
-	tep = reg.SökNamn("olle");
-	if (tep) {
-		std::cout << tep->adress << std::endl;
-		reg.TaBortEntry(tep);
-	}
-	else
-		std::cout << "not found \n";
-
-	
-
+	std::cout << "Aktuellt register efter borttagning: \n";
 	reg.Print();
 
 	reg.Töm();
+	std::cout << "Registret har tömts \n";
+	reg.Print();
+}
+void Test2ish() {
+	PersonReg reg(10);
+	Init(reg);
+	std::string namn, adress;
+
+	std::cout << "vilket namn vill du ta bort? \n";
+	std::getline(std::cin, namn);
+
+	Person* tep = nullptr;
+	bool found = false;
+	// genom att använda en whileloop så går koden igenom alla instanser av namnet angivet. tar bort alla olle till exempel
+	while((tep=reg.SökNamn(namn))!=nullptr)
+	{
+		std::cout << "Adress för " << namn << ": " << tep->adress << std::endl;
+
+		reg.TaBortEntry(tep);
+		found = true;
+		std::cout << "Har tagits bort från registret. \n";
+	}
+	if(!found)
+	{
+		std::cout << "not found \n";
+	}
+	std::cout << "Aktuellt register efter borttagning: \n";
+	reg.Print();
+
+	reg.Töm();
+	std::cout << "Registret har tömts \n";
 	reg.Print();
 }
 
@@ -240,22 +254,8 @@ int main() {
 	PersonReg pr(5);
 	Init(pr);
 	Test1();
+	Test2ish();
 	//Test2();
 	//Test3();
 	std::cin.get();
 }
-//int main()
-//{
-//	std::cout << "Hello World!\n";
-//}
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
