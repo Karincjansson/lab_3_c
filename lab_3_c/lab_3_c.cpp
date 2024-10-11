@@ -34,14 +34,17 @@
 
 void Init(PersonReg& tr) {
 	tr.Töm();
-	PD(tr.LäggTillTest("Olle", "0703955123"));
-	PD(tr.LäggTillTest("Olle", "123"));
-	PD(tr.LäggTillTest("Kurtåke", "12345"));
-	PD(tr.LäggTillTest("Olle", "456"));
-	PD(tr.LäggTillTest("Sven", "456"));
-	PD(tr.LäggTillTest("Kurt", "95815"));
+	
+
+	tr.LäggTillTest("Olle", "0703955123");
+	tr.LäggTillTest("Olle", "123");
+
+	tr.LäggTillTest("Kurtåke", "12345");
+	tr.LäggTillTest("Olle", "456");
+	tr.LäggTillTest("Sven", "456");
+	(tr.LäggTillTest("Kurt", "95815"));
 	PN(std::endl);
-	PN(("fullt reg "));
+	//PN(("fullt reg "));
 	PN((std::endl));
 	DN((tr.Print()));
 }
@@ -52,47 +55,95 @@ void Init(PersonReg& tr) {
 void Test1() {
 	PersonReg reg(10);
 	reg.ReadReg(reg, "PersonExempel.txt");
-	reg.Print(); std::cout << "\n\n";
+	reg.Print(); //PN("\n\n");
 	reg.Töm();
 
 	reg.Print();
 
 }
 
-void Test2() {
-	PersonReg reg(10);
-	reg.ReadReg(reg, "PersonExempel.txt");
-	reg.Print(); std::cout << "\n\n";
-	Init(reg);
-	std::string namn, adress;
-
-	PN("vilket namn vill du ta bort? \n");
-	std::getline(std::cin, namn);
-
-	Person* tep = reg.SökNamn(namn);
-
-	if (tep) {
-		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-
-		reg.TaBortEntry(tep);
-		PN("Har tagits bort från registret. \n");
-	}
-	else {
-		PN("not found \n");
-	}
-
-	PN("Aktuellt register efter borttagning: \n");
-	reg.Print();
-
-	reg.Töm();
-	PN("Registret har tömts \n");
-	reg.Print();
-}
+//void Test2() {
+//	PersonReg reg(10);
+//	//reg.Print(); std::cout << "\n\n";
+//	Init(reg);
+//	std::string namn, adress;
+//	
+//	PN("vilket namn vill du ta bort? \n");
+//	std::getline(std::cin, namn);
+//
+//	Person* tep = reg.SökNamn(namn);
+//
+//	if (tep) {
+//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+//
+//		reg.TaBortEntry(tep);
+//		PN("Har tagits bort från registret. \n");
+//	}
+//	else {
+//		PN("not found \n");
+//	}
+//	/*Person* tep = reg.SökNamn(namn);*/
+//
+//	if (tep) {
+//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+//
+//		reg.TaBortEntry(tep);
+//		PN("Har tagits bort från registret. \n");
+//	}
+//	else {
+//		PN("not found \n");
+//	}
+//	/*Person* tep = reg.SökNamn(namn);*/
+//
+//	if (tep) {
+//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+//
+//		reg.TaBortEntry(tep);
+//		PN("Har tagits bort från registret. \n");
+//	}
+//	else {
+//		PN("not found \n");
+//	}
+//	/*Person* tep = reg.SökNamn(namn);*/
+//
+//	if (tep) {
+//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+//
+//		reg.TaBortEntry(tep);
+//		PN("Har tagits bort från registret. \n");
+//	}
+//	else {
+//		PN("not found \n");
+//	}
+//	/*Person* tep = reg.SökNamn(namn);*/
+//
+//	if (tep) {
+//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+//
+//		reg.TaBortEntry(tep);
+//		PN("Har tagits bort från registret. \n");
+//	}
+//	else {
+//		PN("not found \n");
+//	}
+//
+//	PN("Aktuellt register efter borttagning: \n");
+//	reg.Print();
+//
+//	reg.Töm();
+//	PN("Registret har tömts \n");
+//	reg.Print();
+//}
 void Test2ish() {
-	PersonReg reg(10);
-	Init(reg);
-	std::string namn, adress;
 
+	PersonReg reg(5);
+
+	//Init(reg);
+	reg.ReadReg(reg , "PersonExempel.txt");
+	
+	std::string namn, adress;
+	reg.Print();
+	PN("\n");
 	PN("vilket namn vill du ta bort? \n");
 	std::getline(std::cin, namn);
 
@@ -105,62 +156,72 @@ void Test2ish() {
 
 		reg.TaBortEntry(tep);
 		found = true;
-		PN("Har tagits bort från registret. \n");
+		PN("Har tagits bort från registret. \n\n");
 	}
 	if (!found)
 	{
 		std::cout << "not found \n";
 	}
-	PN("Aktuellt register efter borttagning: \n");
+	PN("Aktuellt register efter borttagning: \n\n");
 	reg.Print();
 
 	reg.Töm();
+	PN("\n");
 	PN("Registret har tömts \n");
 	reg.Print();
 }
 
-//void Test3() {
-//	PersonReg reg(10);
-//
-//	Init(reg);
-//	reg.Print();
-//	std::string namn, adress;
-//	Person te, * tep;
-//
-//	tep = nullptr;
-//	while (tep = reg.SökFritt("olle", tep)) {
-//		tep->Print();
-//		//        cout << tep->adress << endl;
-//	}
-//	PN("not found \n");
-//
-//	PN("blandade sökningar \n");
-//	Person* ptr1 = nullptr, * ptr2 = nullptr;
-//	bool first = true;
-//	while (first || ptr1 || ptr2) {
-//		if (ptr1 || first) {
-//			ptr1 = reg.SökFritt("olle", ptr1);
-//			if (ptr1)
-//				ptr1->Print();
-//		}
-//		if (ptr2 || first) {
-//			ptr2 = reg.SökFritt("581", ptr2);
-//			if (ptr2)
-//				ptr2->Print();
-//		}
-//		first = false;
-//	}
-//}
+void Test3() {
+	PersonReg reg(5);
+
+	Init(reg);
+	reg.Print();
+
+	std::string namn, adress;
+	Person te, * tep;
+
+	tep = nullptr;//sätts till nullptr så sökningen börjar från först instansen
+
+	//om söknamnet Olle finns så skrivs all info ut
+	while (tep = reg.SökFritt("Olle", tep)) {
+		tep->Print();
+		//        cout << tep->adress << endl;
+	}
+	//om inte skrivs not found ut
+	PN("not found \n");
+
+	PN("blandade sökningar \n");
+
+	Person* ptr1 = nullptr, * ptr2 = nullptr;
+	bool first = true;
+	while (first || ptr1 || ptr2) {
+		if (ptr1 || first) {
+			ptr1 = reg.SökFritt("Olle", ptr1);
+			if (ptr1)
+				ptr1->Print();
+		}
+		if (ptr2 || first) {
+			ptr2 = reg.SökFritt("581", ptr2);
+			if (ptr2)
+				ptr2->Print();
+		}
+		first = false;
+	}
+}
 
 	int main()
 	{
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 		std::locale::global(std::locale("swedish"));
-		PersonReg pr(5);
-		Init(pr);
-		Test1();
-		Test2ish();
+	/*	std::cin.imbue(std::locale("swedish"));
+		std::cout.imbue(std::locale("swedish"));*/
+		//PersonReg pr(10);
+		//Init(pr);
+		//pr.Print();
+
+		//Test1();
+		//Test2ish();
 		//Test2();
-		//Test3();
+		Test3();
 		std::cin.get();
 	}
