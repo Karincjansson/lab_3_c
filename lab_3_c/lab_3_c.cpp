@@ -172,36 +172,36 @@ void Test2ish() {
 }
 
 void Test3() {
-	PersonReg reg(5);
+	PersonReg reg(6);
 
 	Init(reg);
-	reg.Print();
+	PN('\n');
 
 	std::string namn, adress;
-	Person te, * tep;
+	Person  * tep;
 
 	tep = nullptr;//sätts till nullptr så sökningen börjar från först instansen
 
 	//om söknamnet Olle finns så skrivs all info ut
 	while (tep = reg.SökFritt("Olle", tep)) {
 		tep->Print();
-		//        cout << tep->adress << endl;
+		        //cout << tep->adress << endl;
 	}
 	//om inte skrivs not found ut
 	PN("not found \n");
-
+	PN('\n');
 	PN("blandade sökningar \n");
 
 	Person* ptr1 = nullptr, * ptr2 = nullptr;
 	bool first = true;
 	while (first || ptr1 || ptr2) {
 		if (ptr1 || first) {
-			ptr1 = reg.SökFritt("Olle", ptr1);
+			ptr1 = reg.SökFritt("Kurt", ptr1);
 			if (ptr1)
 				ptr1->Print();
 		}
 		if (ptr2 || first) {
-			ptr2 = reg.SökFritt("581", ptr2);
+			ptr2 = reg.SökFritt("456", ptr2);
 			if (ptr2)
 				ptr2->Print();
 		}
