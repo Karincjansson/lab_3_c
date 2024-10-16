@@ -42,9 +42,9 @@ void Init(PersonReg& tr) {
 	tr.LäggTillTest("Kurtåke", "12345");
 	tr.LäggTillTest("Olle", "456");
 	tr.LäggTillTest("Sven", "456");
-	(tr.LäggTillTest("Kurt", "95815"));
+	tr.LäggTillTest("Kurt", "95815");
 	PN(std::endl);
-	//PN(("fullt reg "));
+	PN(("fullt reg "));
 	PN((std::endl));
 	DN((tr.Print()));
 }
@@ -62,84 +62,84 @@ void Test1() {
 
 }
 
-//void Test2() {
-//	PersonReg reg(10);
-//	//reg.Print(); std::cout << "\n\n";
-//	Init(reg);
-//	std::string namn, adress;
-//	
-//	PN("vilket namn vill du ta bort? \n");
-//	std::getline(std::cin, namn);
-//
-//	Person* tep = reg.SökNamn(namn);
-//
-//	if (tep) {
-//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-//
-//		reg.TaBortEntry(tep);
-//		PN("Har tagits bort från registret. \n");
-//	}
-//	else {
-//		PN("not found \n");
-//	}
-//	/*Person* tep = reg.SökNamn(namn);*/
-//
-//	if (tep) {
-//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-//
-//		reg.TaBortEntry(tep);
-//		PN("Har tagits bort från registret. \n");
-//	}
-//	else {
-//		PN("not found \n");
-//	}
-//	/*Person* tep = reg.SökNamn(namn);*/
-//
-//	if (tep) {
-//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-//
-//		reg.TaBortEntry(tep);
-//		PN("Har tagits bort från registret. \n");
-//	}
-//	else {
-//		PN("not found \n");
-//	}
-//	/*Person* tep = reg.SökNamn(namn);*/
-//
-//	if (tep) {
-//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-//
-//		reg.TaBortEntry(tep);
-//		PN("Har tagits bort från registret. \n");
-//	}
-//	else {
-//		PN("not found \n");
-//	}
-//	/*Person* tep = reg.SökNamn(namn);*/
-//
-//	if (tep) {
-//		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-//
-//		reg.TaBortEntry(tep);
-//		PN("Har tagits bort från registret. \n");
-//	}
-//	else {
-//		PN("not found \n");
-//	}
-//
-//	PN("Aktuellt register efter borttagning: \n");
-//	reg.Print();
-//
-//	reg.Töm();
-//	PN("Registret har tömts \n");
-//	reg.Print();
-//}
+void Test2() {
+	PersonReg reg(10);
+	//reg.Print(); std::cout << "\n\n";
+	Init(reg);
+	std::string namn, adress;
+	
+	PN("vilket namn vill du ta bort? \n");
+	std::getline(std::cin, namn);
+
+	Person* tep = reg.SökNamn(namn);
+
+	if (tep) {
+		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+
+		reg.TaBortEntry(tep);
+		PN("Har tagits bort från registret. \n");
+	}
+	else {
+		PN("not found \n");
+	}
+	/*Person* tep = reg.SökNamn(namn);*/
+
+	if (tep) {
+		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+
+		reg.TaBortEntry(tep);
+		PN("Har tagits bort från registret. \n");
+	}
+	else {
+		PN("not found \n");
+	}
+	/*Person* tep = reg.SökNamn(namn);*/
+
+	if (tep) {
+		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+
+		reg.TaBortEntry(tep);
+		PN("Har tagits bort från registret. \n");
+	}
+	else {
+		PN("not found \n");
+	}
+	/*Person* tep = reg.SökNamn(namn);*/
+
+	if (tep) {
+		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+
+		reg.TaBortEntry(tep);
+		PN("Har tagits bort från registret. \n");
+	}
+	else {
+		PN("not found \n");
+	}
+	/*Person* tep = reg.SökNamn(namn);*/
+
+	if (tep) {
+		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
+
+		reg.TaBortEntry(tep);
+		PN("Har tagits bort från registret. \n");
+	}
+	else {
+		PN("not found \n");
+	}
+
+	PN("Aktuellt register efter borttagning: \n");
+	reg.Print();
+
+	reg.Töm();
+	PN("Registret har tömts \n");
+	reg.Print();
+}
 void Test2ish() {
 
-	PersonReg reg(5);
+	PersonReg reg(10);
 
-	//Init(reg);
-	reg.ReadReg(reg , "PersonExempel.txt");
+	Init(reg);
+	//reg.ReadReg(reg , "PersonExempel.txt");
 	
 	std::string namn, adress;
 	reg.Print();
@@ -196,12 +196,12 @@ void Test3() {
 	bool first = true;
 	while (first || ptr1 || ptr2) {
 		if (ptr1 || first) {
-			ptr1 = reg.SökFritt("Kurt", ptr1);
+			ptr1 = reg.SökFritt("Olle", ptr1);
 			if (ptr1)
 				ptr1->Print();
 		}
 		if (ptr2 || first) {
-			ptr2 = reg.SökFritt("456", ptr2);
+			ptr2 = reg.SökFritt("581", ptr2);
 			if (ptr2)
 				ptr2->Print();
 		}

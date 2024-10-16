@@ -25,7 +25,8 @@
 	{
 		PN("Namn: " + name +" "+ "Adress: " + adress);
 		PN( "\n");
-	};
+	}
+	Person::~Person() {};
 	
 
 

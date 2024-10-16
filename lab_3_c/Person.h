@@ -3,6 +3,7 @@
 #include <string>
 class Person
 {
+protected:
 	std::string name;
 	std::string adress;
 public:
@@ -11,6 +12,7 @@ public:
 	std::string getName()const;
 	std::string getAdress()const;
 
-	void Print() const;
+	virtual void Print() const;
+	virtual ~Person();
 };
 #endif
