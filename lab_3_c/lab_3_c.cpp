@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Person.h"
 #include "PersonReg.h"
+#include "PersonMedTelefon.h"
 
 #ifdef _DEBUG
 #define _CRTDBG_MAP_ALLOC
@@ -38,11 +39,12 @@ void Init(PersonReg& tr) {
 
 	tr.LäggTillTest("Olle", "0703955123");
 	tr.LäggTillTest("Olle", "123");
-
 	tr.LäggTillTest("Kurtåke", "12345");
 	tr.LäggTillTest("Olle", "456");
 	tr.LäggTillTest("Sven", "456");
 	tr.LäggTillTest("Kurt", "95815");
+
+	
 	PN(std::endl);
 	PN(("fullt reg "));
 	PN((std::endl));
@@ -222,6 +224,17 @@ void Test3() {
 		//Test1();
 		//Test2ish();
 		//Test2();
-		Test3();
+		//Test3();
+
+		//Uppgift 3?? bug !=butterfly
+		PersonReg reg(2);
+		
+		Person* person1 = new Person("Anna ", "123456");
+		Person* person2 = new PersonMedTelefon("Erik", "475849", "1234567");
+		reg.LäggTill(*person1);
+		reg.LäggTill(*person2);
+		reg.Print();
+		//Init(reg);
+		
 		std::cin.get();
 	}
