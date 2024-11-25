@@ -34,8 +34,9 @@
 
 
 void Init(PersonReg& tr) {
-	tr.Töm();
 	
+	tr.Töm();
+
 
 	tr.LäggTillTest("Olle", "0703955123");
 	tr.LäggTillTest("Olle", "123");
@@ -43,8 +44,8 @@ void Init(PersonReg& tr) {
 	tr.LäggTillTest("Olle", "456");
 	tr.LäggTillTest("Sven", "456");
 	tr.LäggTillTest("Kurt", "95815");
-
 	
+
 	PN(std::endl);
 	PN(("fullt reg "));
 	PN((std::endl));
@@ -69,7 +70,7 @@ void Test2() {
 	//reg.Print(); std::cout << "\n\n";
 	Init(reg);
 	std::string namn, adress;
-	
+
 	PN("vilket namn vill du ta bort? \n");
 	std::getline(std::cin, namn);
 
@@ -138,13 +139,17 @@ void Test2() {
 }
 void Test2ish() {
 
-	PersonReg reg(10);
-
-	Init(reg);
-	//reg.ReadReg(reg , "PersonExempel.txt");
-	
 	std::string namn, adress;
-	reg.Print();
+	PersonReg reg(6);
+	
+	Init(reg);
+	
+	/*PN(reg.maxSize );
+	PN("\n");*/
+	//reg.ReadReg(reg , "PersonExempel.txt");
+
+	//
+	//reg.Print();//ifall du använder textfilen
 	PN("\n");
 	PN("vilket namn vill du ta bort? \n");
 	std::getline(std::cin, namn);
@@ -165,12 +170,12 @@ void Test2ish() {
 		std::cout << "not found \n";
 	}
 	PN("Aktuellt register efter borttagning: \n\n");
-	reg.Print();
+	reg.Print();// visar vilka som är kvar
 
-	reg.Töm();
+	reg.Töm();//töm 
 	PN("\n");
 	PN("Registret har tömts \n");
-	reg.Print();
+	reg.Print();//kollara bara att det är tömt ordentligt
 }
 
 void Test3() {
@@ -180,20 +185,22 @@ void Test3() {
 	PN('\n');
 
 	std::string namn, adress;
-	Person  * tep;
+	Person* tep;
 
 	tep = nullptr;//sätts till nullptr så sökningen börjar från först instansen
 
 	//om söknamnet Olle finns så skrivs all info ut
 	while (tep = reg.SökFritt("Olle", tep)) {
 		tep->Print();
-		        //cout << tep->adress << endl;
+		//cout << tep->adress << endl;
 	}
 	//om inte skrivs not found ut
-	PN("not found \n");
-	PN('\n');
-	PN("blandade sökningar \n");
+	/*PN("not found \n");
+	PN('\n');*/
 
+
+	PN("blandade sökningar: \n");
+	//om adressen hr en siffra i sig så skrivs den ut, även om den är utskriven på namn med
 	Person* ptr1 = nullptr, * ptr2 = nullptr;
 	bool first = true;
 	while (first || ptr1 || ptr2) {
@@ -203,7 +210,7 @@ void Test3() {
 				ptr1->Print();
 		}
 		if (ptr2 || first) {
-			ptr2 = reg.SökFritt("581", ptr2);
+			ptr2 = reg.SökFritt("1", ptr2);
 			if (ptr2)
 				ptr2->Print();
 		}
@@ -211,30 +218,30 @@ void Test3() {
 	}
 }
 
-	int main()
-	{
-		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-		std::locale::global(std::locale("swedish"));
-	/*	std::cin.imbue(std::locale("swedish"));
-		std::cout.imbue(std::locale("swedish"));*/
-		//PersonReg pr(10);
-		//Init(pr);
-		//pr.Print();
+int main()
+{
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	std::locale::global(std::locale("swedish"));
+		std::cin.imbue(std::locale("swedish"));
+		std::cout.imbue(std::locale("swedish"));
+	//PersonReg pr(10);
+	//Init(pr);
+	
 
-		//Test1();
-		//Test2ish();
-		//Test2();
-		//Test3();
+	//Test1();
+	//Test2ish();
+	//Test2();//fixa? verkar som som den läser kurt som sven??
+	Test3();
 
-		//Uppgift 3?? bug !=butterfly
-		PersonReg reg(2);
-		
-		Person* person1 = new Person("Anna ", "123456");
-		Person* person2 = new PersonMedTelefon("Erik", "475849", "1234567");
-		reg.LäggTill(*person1);
-		reg.LäggTill(*person2);
-		reg.Print();
-		//Init(reg);
-		
-		std::cin.get();
-	}
+	//Uppgift 3?? bug !=butterfly
+	/*PersonReg reg(2);
+
+	Person* person1 = new Person("Anna ", "123456");
+	Person* person2 = new PersonMedTelefon("Erik", "475849", "1234567");
+	reg.LäggTill(*person1);
+	reg.LäggTill(*person2);
+	reg.Print();*/
+	//Init(reg);
+
+	std::cin.get();
+}

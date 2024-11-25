@@ -10,12 +10,12 @@ class PersonReg
 private:
 	Person* personer;
 
-	int maxSize;
+	//int maxSize;
 	int currentSize;
 public:
 	PersonReg(int maxSize);
 	~PersonReg();
-
+	int maxSize;
 	bool LäggTill(const Person& person);
 	bool LäggTillTest(const std::string& namn, const std::string& adress);
 	bool ReadReg(PersonReg& reg, const std::string& filename);
