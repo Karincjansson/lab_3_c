@@ -65,77 +65,50 @@ void Test1() {
 
 }
 
-void Test2() {
+void Test2() 
+{
 	PersonReg reg(10);
-	//reg.Print(); std::cout << "\n\n";
 	Init(reg);
 	std::string namn, adress;
-
-	PN("vilket namn vill du ta bort? \n");
-	std::getline(std::cin, namn);
-
-	Person* tep = reg.SökNamn(namn);
-
-	if (tep) {
-		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-
-		reg.TaBortEntry(tep);
-		PN("Har tagits bort från registret. \n");
-	}
-	else {
-		PN("not found \n");
-	}
-	/*Person* tep = reg.SökNamn(namn);*/
-
-	if (tep) {
-		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-
-		reg.TaBortEntry(tep);
-		PN("Har tagits bort från registret. \n");
-	}
-	else {
-		PN("not found \n");
-	}
-	/*Person* tep = reg.SökNamn(namn);*/
-
-	if (tep) {
-		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-
-		reg.TaBortEntry(tep);
-		PN("Har tagits bort från registret. \n");
-	}
-	else {
-		PN("not found \n");
-	}
-	/*Person* tep = reg.SökNamn(namn);*/
-
-	if (tep) {
-		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-
-		reg.TaBortEntry(tep);
-		PN("Har tagits bort från registret. \n");
-	}
-	else {
-		PN("not found \n");
-	}
-	/*Person* tep = reg.SökNamn(namn);*/
-
-	if (tep) {
-		std::cout << "Adress för " << namn << ": " << tep->getAdress() << std::endl;
-
-		reg.TaBortEntry(tep);
-		PN("Har tagits bort från registret. \n");
-	}
-	else {
-		PN("not found \n");
-	}
-
-	PN("Aktuellt register efter borttagning: \n");
+	Person te, * tep;
+	tep = reg.SökNamn("Olle"); 
+		if (tep) {
+			std::cout << tep->getAdress() << std::endl;
+			reg.TaBortEntry(tep);
+		}
+		else
+			std::cout << "not found \n";
+	tep = reg.SökNamn("Olle"); 
+		if (tep) {
+			std::cout << tep->getAdress() << std::endl;
+			reg.TaBortEntry(tep);
+		}
+		else
+			std::cout << "not found \n";
+	tep = reg.SökNamn("Olle"); 
+		if (tep) {
+			std::cout << tep->getAdress() << std::endl;
+			reg.TaBortEntry(tep);
+		}
+		else
+			std::cout << "not found \n";
+	tep = reg.SökNamn("Olle"); 
+		if (tep) {
+			std::cout << tep->getAdress() << std::endl;
+			reg.TaBortEntry(tep);
+		}
+		else
+			std::cout << "not found \n";
+	tep = reg.SökNamn("Olle"); 
+		if (tep) {
+			std::cout << tep->getAdress() << std::endl;
+			reg.TaBortEntry(tep);
+		}
+		else
+			std::cout << "not found \n";
 	reg.Print();
-
-	reg.Töm();
-	PN("Registret har tömts \n");
-	reg.Print();
+	reg.Töm(); 
+		reg.Print();
 }
 void Test2ish() {
 
@@ -190,10 +163,10 @@ void Test3() {
 	tep = nullptr;//sätts till nullptr så sökningen börjar från först instansen
 
 	//om söknamnet Olle finns så skrivs all info ut
-	while (tep = reg.SökFritt("Olle", tep)) {
-		tep->Print();
-		//cout << tep->adress << endl;
-	}
+	//while (tep = reg.SökFritt("Olle", tep)) {
+	//	tep->Print();
+	//	//cout << tep->adress << endl;
+	//}
 	//om inte skrivs not found ut
 	/*PN("not found \n");
 	PN('\n');*/
@@ -203,15 +176,20 @@ void Test3() {
 	//om adressen hr en siffra i sig så skrivs den ut, även om den är utskriven på namn med
 	Person* ptr1 = nullptr, * ptr2 = nullptr;
 	bool first = true;
-	while (first || ptr1 || ptr2) {
+	while (first || ptr1 || ptr2)
+	{
 		if (ptr1 || first) {
 			ptr1 = reg.SökFritt("Olle", ptr1);
 			if (ptr1)
 				ptr1->Print();
+			
 		}
+		
 		if (ptr2 || first) {
-			ptr2 = reg.SökFritt("1", ptr2);
+			
+			ptr2 = reg.SökFritt("6", ptr2);
 			if (ptr2)
+				
 				ptr2->Print();
 		}
 		first = false;
@@ -230,7 +208,8 @@ int main()
 
 	//Test1();
 	//Test2ish();
-	//Test2();//fixa? verkar som som den läser kurt som sven??
+
+	//Test2();//deras
 	Test3();
 
 	//Uppgift 3?? bug !=butterfly
